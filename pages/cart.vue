@@ -50,7 +50,7 @@ export default {
         this.$alert(`恭喜您，已成功下单，订单号:${id}`, "下单成功", {
           confirmButtonText: "确定",
           callback: action => {
-            location.href = "/order";
+            // location.href = "/order";
           }
         });
       }
