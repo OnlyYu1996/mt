@@ -12,7 +12,7 @@ router.get("/crumbs", async ctx => {
     data: { areas, types }
   } = await axios.get(`${url}crumbs`, {
     params: {
-      city: ctx.query.city.replace("市", "") || "北京"
+      city: ctx.query.city?ctx.query.city.replace("市", "") : "北京"
     }
   });
   ctx.body = {

@@ -14,7 +14,6 @@ passport.use(
         phone
       };
       let result = await UserModel.findOne(where);
-      console.log(result);
       if (result != null) {
         if (result.password === password) {
           return done(null, result);

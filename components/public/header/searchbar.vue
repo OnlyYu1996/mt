@@ -53,15 +53,9 @@ export default {
       // 搜索框的内容
       searchValue: "",
       // 显示搜索内容
-      showBlock: false
+      showBlock: false,
+      city: ""
     };
-  },
-  computed: {
-    city() {
-      return sessionStorage.getItem("position")
-        ? JSON.parse(sessionStorage.getItem("position")).city
-        : this.$store.state.geo.position.city;
-    }
   },
   watch: {
     showSearchList(val) {
@@ -76,9 +70,13 @@ export default {
     }
   },
   methods: {
-    search(){
-      const self=this
-      location.href='/products?keyword='+encodeURIComponent(self.searchValue)+'&city='+encodeURIComponent(self.city)
+    search() {
+      const self = this;
+      location.href =
+        "/products?keyword=" +
+        encodeURIComponent(self.searchValue) +
+        "&city=" +
+        encodeURIComponent(self.city);
     },
     searchInput: _.debounce(async function() {
       let self = this;
@@ -95,6 +93,11 @@ export default {
       });
       self.searchList = top.slice(0, 10);
     }, 300)
+  },
+  mounted() {
+    this.city = sessionStorage.getItem("position")
+      ? JSON.parse(sessionStorage.getItem("position")).city
+      : this.$store.state.geo.position.city;
   }
 };
 </script>

@@ -127,10 +127,9 @@ export default {
             password: cryptJS.MD5(self.sendForm.pwd).toString()
           })
           .then(({ status, data }) => {
-            console.log(data);
             if (status === 200) {
               if (data && data.code === 0) {
-                self.$router.go(-1)
+                self.$router.go(-1);
               } else {
                 self.$message.error(data.msg || "请求失败");
               }
@@ -141,6 +140,13 @@ export default {
       } else {
         self.$message.error("请输入正确的用户名以及密码");
       }
+    }
+  },
+  beforeRouteLeave(to, from, next) {
+    if (to.fullPath === "/register") {
+      this.$router.push("/");
+    } else {
+      next();
     }
   }
 };

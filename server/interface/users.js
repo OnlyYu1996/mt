@@ -76,22 +76,21 @@ router.post("/signup", async ctx => {
     createTime: new Date().getTime()
   });
   if (nuser) {
-    let res = await axios.post("/users/signin", {
-      username,
-      password
-    });
-    if (res.data && res.data.code === 0) {
+    // let res = await axios.post("users/signin", {
+    //   phone,
+    //   password
+    // });
+    // if (res.data && res.data.code === 0) {
       ctx.body = {
         code: 0,
-        msg: "注册成功",
-        user: res.data.user
+        msg: "注册成功"
       };
-    } else {
-      ctx.body = {
-        code: -1,
-        msg: "error"
-      };
-    }
+    // } else {
+    //   ctx.body = {
+    //     code: -1,
+    //     msg: "error"
+    //   };
+    // }
   } else {
     ctx.body = {
       code: -1,
@@ -128,13 +127,13 @@ router.post('/signin', async (ctx, next) => {
 router.post("/verify", async (ctx, next) => {
   let username = ctx.request.body.username;
   const saveExpire = await Store.hget(`nodemail:${username}`, "expire");
-  if (saveExpire && new Date().getTime() - saveExpire < 0) {
-    ctx.body = {
-      code: -1,
-      msg: "验证码请求过于频繁"
-    };
-    return false;
-  }
+  // if (saveExpire && new Date().getTime() - saveExpire < 0) {
+  //   ctx.body = {
+  //     code: -1,
+  //     msg: "验证码请求过于频繁"
+  //   };
+  //   return false;
+  // }
   // 邮件发送方
   let transporter = nodeMailer.createTransport({
     service: "qq",

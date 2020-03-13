@@ -48,14 +48,14 @@
       <p class="copyright">
         ©
         <a
-          href="https://www.meituan.com"
+          href="#"
           class="f1"
           target="_blank"
           rel="noopener noreferrer"
         >meituan.com</a>
         &nbsp;
         <a
-          href="http://www.miibeian.gov.cn/"
+          href="#"
           target="_blank"
           rel="noopener noreferrer"
           class="f1"
@@ -192,7 +192,7 @@ export default {
             .then(({ status, data }) => {
               if (status === 200) {
                 if (data && data.code === 0) {
-                  location.href = "/login";
+                  self.$router.push('/login')
                 } else {
                   self.$message.error(data.msg || "错误");
                 }
